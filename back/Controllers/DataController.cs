@@ -60,7 +60,7 @@ namespace RetoTecnicoXAl.Controllers
         [Route("aerolinea/aeropuertoMayorFlujo")]
         public async Task<IEnumerable<Aeropuerto>> aeropuertoMayorFlujo()
         {
-            string queryBD = "SELECT TOP 1 count([aeropuerto].[dbo].[aeropuerto].nombre_aerolinea) AS numero_movimientos, [aeropuerto].[dbo].[aeropuerto].aeropuerto_mayor_flujo FROM [aeropuerto].[dbo].[vuelos] INNER JOIN [aeropuerto].[dbo].[aeropuerto] ON [aeropuerto].[dbo].[aeropuerto].id_aeropuerto = [aeropuerto].[dbo].[vuelos].id_aeropuerto GROUP BY [aeropuerto].[dbo].[aeropuerto].nombre_aerolinea;";
+            string queryBD = "SELECT TOP 1 count([aeropuerto].[dbo].[aeropuerto].nombre_aerolinea) AS numero_movimientos, [aeropuerto].[dbo].[aeropuerto].nombre_aerolinea AS nombre FROM [aeropuerto].[dbo].[vuelos] INNER JOIN [aeropuerto].[dbo].[aeropuerto] ON [aeropuerto].[dbo].[aeropuerto].id_aeropuerto = [aeropuerto].[dbo].[vuelos].id_aeropuerto GROUP BY [aeropuerto].[dbo].[aeropuerto].nombre_aerolinea;";
             try
             {
 
@@ -81,7 +81,7 @@ namespace RetoTecnicoXAl.Controllers
         [Route("aerolinea/aerolineaMayorFlujo")]
         public async Task<IEnumerable<Aeropuerto>> aerolineaMayorFlujo()
         {
-            string queryBD = "SELECT TOP 1 count([aeropuerto].[dbo].[aerolineas].nombre_aerolinea) AS numero_movimientos, [aeropuerto].[dbo].[aerolineas].nombre_aerolinea FROM [aeropuerto].[dbo].[vuelos] INNER JOIN [aeropuerto].[dbo].[aerolineas] ON [aeropuerto].[dbo].[aerolineas].id_aerolinea = [aeropuerto].[dbo].[vuelos].id_aerolinea GROUP BY [aeropuerto].[dbo].[aerolineas].nombre_aerolinea;";
+            string queryBD = "SELECT TOP 1 count([aeropuerto].[dbo].[aerolineas].nombre_aerolinea) AS numero_movimientos, [aeropuerto].[dbo].[aerolineas].nombre_aerolinea AS nombre FROM [aeropuerto].[dbo].[vuelos] INNER JOIN [aeropuerto].[dbo].[aerolineas] ON [aeropuerto].[dbo].[aerolineas].id_aerolinea = [aeropuerto].[dbo].[vuelos].id_aerolinea GROUP BY [aeropuerto].[dbo].[aerolineas].nombre_aerolinea;";
             try
             {
 
@@ -102,7 +102,7 @@ namespace RetoTecnicoXAl.Controllers
         [Route("aerolinea/diasMasVuelos")]
         public async Task<IEnumerable<Aeropuerto>> diasMasVuelos()
         {
-            string queryBD = "SELECT TOP 1 count([aeropuerto].[dbo].[vuelos].dia) AS numero_movimientos, [aeropuerto].[dbo].[vuelos].dia FROM [aeropuerto].[dbo].[vuelos] GROUP BY [aeropuerto].[dbo].[vuelos].dia;";
+            string queryBD = "SELECT TOP 1 count([aeropuerto].[dbo].[vuelos].dia) AS numero_movimientos, [aeropuerto].[dbo].[vuelos].dia AS nombre FROM [aeropuerto].[dbo].[vuelos] GROUP BY [aeropuerto].[dbo].[vuelos].dia;";
             try
             {
 
@@ -123,7 +123,7 @@ namespace RetoTecnicoXAl.Controllers
         [Route("aerolinea/diasDosVuelos")]
         public async Task<IEnumerable<Aeropuerto>> diasDosVuelos()
         {
-            string queryBD = "WITH cc as (SELECT count([aeropuerto].[dbo].[vuelos].dia) AS numero_movimientos, [aeropuerto].[dbo].[vuelos].dia, [aeropuerto].[dbo].[vuelos].id_aerolinea FROM [aeropuerto].[dbo].[vuelos] GROUP BY [aeropuerto].[dbo].[vuelos].dia, [aeropuerto].[dbo].[vuelos].id_aerolinea) SELECT cc.numero_movimientos, [aeropuerto].[dbo].[aerolineas].nombre_aerolinea AS aerolinea_mayor_flujo FROM cc INNER JOIN [aeropuerto].[dbo].[aerolineas] ON [aeropuerto].[dbo].[aerolineas].id_aerolinea = cc.id_aerolinea WHERE cc.numero_movimientos > 2;";
+            string queryBD = "WITH cc as (SELECT count([aeropuerto].[dbo].[vuelos].dia) AS numero_movimientos, [aeropuerto].[dbo].[vuelos].dia, [aeropuerto].[dbo].[vuelos].id_aerolinea FROM [aeropuerto].[dbo].[vuelos] GROUP BY [aeropuerto].[dbo].[vuelos].dia, [aeropuerto].[dbo].[vuelos].id_aerolinea) SELECT cc.numero_movimientos, [aeropuerto].[dbo].[aerolineas].nombre_aerolinea AS nombre FROM cc INNER JOIN [aeropuerto].[dbo].[aerolineas] ON [aeropuerto].[dbo].[aerolineas].id_aerolinea = cc.id_aerolinea WHERE cc.numero_movimientos > 2;";
             try
             {
 
